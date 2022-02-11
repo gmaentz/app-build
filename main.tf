@@ -5,7 +5,7 @@ provider "aws" {
 }
 
 module "server" {
-  count                  = 1
+  count                  = 2
   source                 = "app.terraform.io/example-org-5dcc43/server/aws"
   version                = "0.0.3"
   environment            = var.environment
