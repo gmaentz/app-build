@@ -31,7 +31,7 @@ variable "web_ingress" {
 }
 
 resource "aws_security_group" "main" {
-  name = "core-sg"
+  name = "core-sg-${var.identity}"
 
   dynamic "ingress" {
     for_each = var.web_ingress
@@ -42,6 +42,10 @@ resource "aws_security_group" "main" {
       protocol    = ingress.value.protocol
       cidr_blocks = ingress.value.cidr_blocks
     }
+  }
+  
+   lifecycle {
+    create_before_destroy = true
   }
 }
 
