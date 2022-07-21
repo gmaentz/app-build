@@ -9,21 +9,19 @@
 # Your subnet ID is:
 #   
 
-# "subnet-0cd5968bbf86c4bc5"
+# "subnet-0751af606bf44a5ca"
 
 #
 # Your VPC security group ID is:
 #  
 
-# "sg-06263eba9f95e8690"
+# "sg-0ee8c758b298ca0b8"
 
 #
 # Your Identity is:
 #
 #     "awsaccount"
 #
-
-# Sample update
 
 
 variable "access_key" {
@@ -72,41 +70,18 @@ locals {
   servers = {
     server-apache = {
       server_os              = "ubuntu_20_04"
-      identity               = "$var.identity-ubuntu"
+      identity               = "${var.identity}-ubuntu"
       subnet_id              = var.subnet_id
       vpc_security_group_ids = var.vpc_security_group_ids
     }
   }
 }
 
-resource "random_uuid" "test" {
-}
-
-locals {
-  bucket = "${random_uuid.test.result}-bucket"
-}
-variable "acl" {
-  default = "private"
-}
-
-module "s3_bucket" {
-  source = "terraform-aws-modules/s3-bucket/aws"
-
-  bucket = local.bucket
-  acl    = var.acl
-
-  versioning = {
-    enabled = true
-  }
-
-}
-
 module "server" {
-  source   = "app.terraform.io/example-org-580a9f/server/aws"
-  version  = "0.0.3"
-  for_each = local.servers
-  # server_os              = each.value.server_os
-  ami                    = var.ami
+  source                 = "app.terraform.io/gabe-training-advanced-072022/server/aws"
+  version                = "0.0.4"
+  for_each               = local.servers
+  server_os              = each.value.server_os
   identity               = each.value.identity
   subnet_id              = each.value.subnet_id
   vpc_security_group_ids = each.value.vpc_security_group_ids

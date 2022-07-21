@@ -4,14 +4,14 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 4.0"
+      version = "~> 3.0"
     }
   }
   backend "remote" {
-    organization = "example-org-580a9f"
+    organization = "gabe-training-advanced-072022"
 
     workspaces {
-      name = "app-build"
+      name = "webserver-aws-dev"
     }
   }
 }
