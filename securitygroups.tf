@@ -21,6 +21,12 @@ variable "web_ingress" {
       protocol    = "tcp"
       cidr_blocks = ["0.0.0.0/0"]
     }
+    "22" = {
+      description = "Port 22"
+      port        = 22
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
   }
 }
 
