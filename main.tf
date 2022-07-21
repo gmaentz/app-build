@@ -9,13 +9,13 @@
 # Your subnet ID is:
 #   
 
-# "subnet-0751af606bf44a5ca"
+# "subnet-0dc5fa1d445209eb3"
 
 #
 # Your VPC security group ID is:
 #  
 
-# "sg-0ee8c758b298ca0b8"
+# "sg-064fc752107cc3102"
 
 #
 # Your Identity is:
@@ -78,8 +78,8 @@ locals {
 }
 
 module "server" {
-  source                 = "app.terraform.io/gabe-training-advanced-072022/server/aws"
-  version                = "0.0.4"
+  source  = "app.terraform.io/gabe-training-advanced-072022/server/aws"
+  version = "0.0.4"
   for_each               = local.servers
   server_os              = each.value.server_os
   identity               = each.value.identity
