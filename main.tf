@@ -78,7 +78,8 @@ locals {
 }
 
 module "server" {
-  source                 = "./server"
+  source                 = "app.terraform.io/gabe-training-advanced-072022/server/aws"
+  version                = "0.0.4"
   for_each               = local.servers
   server_os              = each.value.server_os
   identity               = each.value.identity
