@@ -8,7 +8,7 @@ terraform {
     }
   }
   backend "remote" {
-    organization = "example-org-22856e"
+    organization = "gabe-training-advanced-072022"
 
     workspaces {
       name = "webserver-aws-dev"

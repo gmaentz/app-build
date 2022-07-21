@@ -9,13 +9,13 @@
 # Your subnet ID is:
 #   
 
-# "subnet-0d165e7ce572ffd49"
+# "subnet-0f2d9015eaa4b1f7a"
 
 #
 # Your VPC security group ID is:
 #  
 
-# "sg-070c8bc76668b95ee"
+# "sg-0fd84edd1a373a896"
 
 #
 # Your Identity is:
@@ -68,21 +68,9 @@ variable "server_os" {
 
 locals {
   servers = {
-    server-iis = {
-      server_os              = "windows_2019"
-      identity               = "$var.identity-windows"
-      subnet_id              = var.subnet_id
-      vpc_security_group_ids = var.vpc_security_group_ids
-    },
     server-apache = {
       server_os              = "ubuntu_20_04"
-      identity               = "$var.identity-ubuntu"
-      subnet_id              = var.subnet_id
-      vpc_security_group_ids = var.vpc_security_group_ids
-    },
-    server-nginx = {
-      server_os              = "ubuntu_20_04"
-      identity               = "$var.identity-ubuntu"
+      identity               = "${var.identity}-ubuntu"
       subnet_id              = var.subnet_id
       vpc_security_group_ids = var.vpc_security_group_ids
     }
@@ -90,8 +78,9 @@ locals {
 }
 
 module "server" {
-  source                 = "app.terraform.io/gabe-training-advanced-072022/server/aws"
-  version                = "0.0.4"
+  # source                 = "./server"
+  source  = "app.terraform.io/gabe-training-advanced-072022/server/aws"
+  version = "0.0.4"
   for_each               = local.servers
   server_os              = each.value.server_os
   identity               = each.value.identity
